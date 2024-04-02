@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """ BasicCache module
 """
-
 from basic_caching import BaseCaching
 
 
 class BasicCache(BaseCaching):
     """ Definition of BasicCache class that inherits from BaseCaching
     """
+
     def put(self, key, item):
         """ Put an item in the cache
         """

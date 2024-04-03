@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-""" FIFO Cache module
 """
-from basic_caching import BaseCaching
+FIFO Cache module for implementing FIFO caching algorithm
+"""
 from collections import deque
+
+from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
@@ -32,7 +34,4 @@ class FIFOCache(BaseCaching):
     def get(self, key):
         """ Get an item from the cache
         """
-        if not key:
-            return None
-
         return self.cache_data.get(key)

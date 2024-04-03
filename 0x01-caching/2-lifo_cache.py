@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-""" LIFO/FILO Cache module
 """
-from basic_caching import BaseCaching
+LIFO/FILO Cache module for implementation of LIFO caching algorithm
+"""
 from collections import deque
+
+from base_caching import BaseCaching
 
 
 class LIFOCache(BaseCaching):

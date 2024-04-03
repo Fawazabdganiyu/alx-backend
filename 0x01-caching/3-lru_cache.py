@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 """
-LIFO/FILO Cache module for implementation of LIFO caching algorithm
+LRU Cache module for implementation of LRU caching algorithm
 """
 from collections import deque
 
 from base_caching import BaseCaching
 
 
-class LIFOCache(BaseCaching):
-    """ Definition of LIFOCache class that inherits from BaseCaching
+class LRUCache(BaseCaching):
+    """ Definition of LRUCache class that inherits from BaseCaching
     """
     def __init__(self):
         """ Initialization
         """
         super().__init__()
-        self.stack = deque()
+        self.order = deque()
 
     def put(self, key, item):
         """ Put an item in the cache
@@ -22,16 +22,19 @@ class LIFOCache(BaseCaching):
         if key and item:
             if len(self.cache_data) == BaseCaching.MAX_ITEMS:
                 if key not in self.cache_data:
-                    evicted_key = self.stack.pop()
+                    evicted_key = self.order.popleft()
                     del self.cache_data[evicted_key]
                     print(f"DISCARD: {evicted_key}")
                 else:
-                    self.stack.remove(key)
+                    self.order.remove(key)
 
-            self.stack.append(key)
+            self.order.append(key)
             self.cache_data[key] = item
 
     def get(self, key):
         """ Get an item from the cache
         """
+        if key in self.order:
+            self.order.remove(key)
+            self.order.append(key)
         return self.cache_data.get(key)

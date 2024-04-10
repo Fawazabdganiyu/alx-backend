@@ -3,7 +3,7 @@
 Flask application definition
 """
 from flask import Flask, render_template, request
-from flask_babel import Babel, _
+from flask_babel import Babel
 
 
 app = Flask(__name__)
@@ -17,14 +17,15 @@ class Config:
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
+app.config.from_object(Config)
+babel = Babel(app)
+
+
+@babel.localeselector
 def get_locale():
     """ Get the best match supported language from user browser
     """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
-
-
-app.config.from_object(Config)
-babel = Babel(app, default_locale=get_locale)
 
 
 @app.route('/', strict_slashes=False)

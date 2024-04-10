@@ -3,7 +3,7 @@
 Flask application definition
 """
 from flask import Flask, render_template, request
-from flask_babel import Babel, _
+from flask_babel import Babel
 
 
 class Config:
@@ -23,7 +23,7 @@ babel = Babel(app)
 def get_locale() -> str:
     """ Get the best match supported language from user browser
     """
-    requested_locale = request.args.get("locale")
+    requested_locale: str = request.args.get("locale")
     if requested_locale in app.config['LANGUAGES']:
         return requested_locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])

@@ -22,7 +22,7 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale() -> Optional[str]:
+def get_locale() -> str:
     """ Get the best match supported language from user browser
     """
     requested_locale = request.args.get("locale")
